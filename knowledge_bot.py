@@ -1,6 +1,7 @@
 import os
+from groq import Groq
 import streamlit as st
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # v0.2 Compatible Imports
 from langchain_community.document_loaders import PyPDFLoader
@@ -12,7 +13,13 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
-load_dotenv()
+# load_dotenv()
+
+os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+
+client = Groq(
+    api_key=os.environ["GROQ_API_KEY"]
+)
 
 # --- Page Setup ---
 st.set_page_config(page_title="RAG Campaign Bot", layout="centered")
